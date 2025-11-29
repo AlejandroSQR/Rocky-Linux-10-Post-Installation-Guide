@@ -77,15 +77,15 @@ sudo dnf upgrade
 **Software > Updates > Check Updates**
 
 # 1. Repositorios Esenciales
-Agrega los repositorios "EPEL" (Extra Packages for Enterprise Linux)
+Agrega los repositorios **"EPEL" (Extra Packages for Enterprise Linux)**
 ```
 sudo dnf install epel-release
 ```
-Agrega los repositorios "ElRepo"
+Agrega los repositorios **"ElRepo"**
 ```
 sudo dnf install https://www.elrepo.org/elrepo-release-10.el10.elrepo.noarch.rpm
 ```
-Agrega los repositorios "RPM Fusion Free & Non Free"
+Agrega los repositorios **"RPM Fusion Free & Non Free"**
 ```
 sudo dnf install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm
 ```
