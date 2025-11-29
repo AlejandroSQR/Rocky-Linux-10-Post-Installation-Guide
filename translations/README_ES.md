@@ -4,7 +4,7 @@
 
 # Rocky Linux 10.x - Guia Post-Instalación (v0.5)
 
-  **Guia detalla instalación de Rocky Linux y futuras versiones (WIP)**
+  **Guia detallada para instalación de Rocky Linux y futuras versiones (WIP)**
 
 </div>
 
