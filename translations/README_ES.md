@@ -1,40 +1,60 @@
-## Introducción
-El ecosistema Linux basado en paquetería RPM/DNF incluye una variedad de distribuciones que varían dependiendo de su comunidad, pero cada una tiene fines diferentes.
-Esta guía está enfocada a Rocky Linux 10 y versiones posteriores, una distribución basada en RHEL que tiene como objetivo la estabilidad a largo plazo, que se mantiene constante a lo largo del tiempo y evita cambios frecuentes o rápidos.
-## Cosas a considerar antes de instalar
-### Secure Boot Desactivado [IMPORTANTE]
+![alt text](https://github.com/AlejandroSQR/Rocky-Linux-10.x-Post-Installation-Guide/blob/main/images/rockypostguide10xlogo.svg "RockyL10XPI")
+
+# Introducción
+Rocky Linux 10 es una distribución basada en RHEL que tiene como objetivo la estabilidad a largo plazo, que se mantiene constante a lo largo del tiempo y evita cambios frecuentes o rápidos. Esta guia sirve para aquellos usuarios que deseen tener su escritorio actualizado y lo escencial para poder trabajar.
+
+# 0.1 Antes de Instalar
+
+## Secure Boot Desactivado [IMPORTANTE]
 En esta guía se hizo en base a una versión con Rocky Linux sin Secure Boot, aun así en algunos puntos se resalta que hacer en caso de que esté activado.
-### NO está hecho para Distribuciones con actualizaciones frecuentes [IMPORTANTE]
-NO lo intentes con distribuciones Linux que se actualizan constantemente, como Fedora Workstation/Spin, Nobara, Bazzite, Asahi, Ultramarine, etc.
-Sin embargo, si quieres aplicar esta guía con las distribuciones mencionadas anteriormente, es posible que funcione, pero es muy probable que dañes tu sistema operativo debido a la frecuencia de las actualizaciones que ofrece cada distribución. Esto incluye herramientas, kernel, controladores y kits de desarrollo, que se actualizan en períodos cortos de tiempo.
-(Si buscas un tutorial para distribuciones basadas en Fedora, consulta la Guía de Post-Instalación para Fedora 43) (Puede funcionar en versiones anteriores de Fedora). 
+
+## NO está hecho para Distribuciones con actualizaciones frecuentes [IMPORTANTE]
+
+**NO** intentes con distribuciones Linux que se actualizan constantemente, como Fedora Workstation/Spin, Nobara, Bazzite, Asahi, Ultramarine, etc.
+
+
+> [!WARNING]
+> Si quieres aplicar esta guía con las distribuciones mencionadas anteriormente, es posible que funcione, pero es muy probable que dañes tu sistema operativo debido a la frecuencia de las actualizaciones que ofrece cada distribución. Esto incluye herramientas, kernel, controladores y kits de desarrollo, que se actualizan en períodos cortos de tiempo.
+
+(Si buscas un tutorial para distribuciones basadas en Fedora, consulta la Guía de Post-Instalación para Fedora 43) 
+
+(Puede funcionar en versiones anteriores de Fedora). 
 [https://github.com/devangshekhawat/Fedora-43-Post-Install-Guide]
 
-### Distros Basados en RHEL [EXPERIM**ENTAL]**
+## Distros Basados en RHEL [EXPERIMENTAL]
 Aunque la guía está escrita para funcionar con Rocky Linux 10 y versiones posteriores, también puede funcionar en otros sistemas basados en RHEL, como lo son Alma Linux, CentOS o similares.
 Sin embargo, no se garantiza la compatibilidad, ya que algunas secciones o herramientas pueden comportarse de manera diferente dependiendo de la distro basada en RHEL, incluidos sus repositorios. *Esto también aplica a versiones anteriores de Rocky (Rocky Linux 8 y 9)*
 ### Diferencias entre ISOs de Rocky Linux
 Link para descargar Rocky Linux 10.x
 [https://rockylinux.org/download](https://rockylinux.org/download)
 - En esta guía se utilizará la instalación completa **(DVD ISO)**, ya que proporciona GNOME de forma predeterminada y limpia, además no es necesario seleccionar configuraciones adicionales.
-- La versión** **Online** (Boot ISO) **requiere conexión a Internet durante la instalación, lo que le ofrece más opciones, repositorios y programas en función de lo que desees, pero eso no cambiará los pasos de esta guía.
-	- Si prefieres una configuración como la versión completa (DVD ISO), solo tiene que marcar Workstation/Desktop durante la instalación.
-- La versión **(Minimal ISO) **no instalará ninguna interfaz gráfica después de la instalación, todo lo que se haga después de reiniciar se realizará desde la línea de comandos.
-	- Si desea instalar un entorno gráfico, pruebe a utilizar este comando (Por defecto, esto instala el entorno Gnome).
+  
+- La versión **Online (Boot ISO)** requiere conexión a Internet durante la instalación, lo que le ofrece más opciones, repositorios y programas en función de lo que desees, pero eso no cambiará los pasos de esta guía.
+
+ > [!TIP]
+> Si prefieres una configuración como la versión completa (DVD ISO), solo tiene que marcar Workstation/Desktop durante la instalación.
+
+- La versión **(Minimal ISO)** no instalará ninguna interfaz gráfica después de la instalación, todo lo que se haga después de reiniciar se realizará desde la línea de comandos.
+ > [!TIP]
+> Si deseas instalar un entorno gráfico, pruebe a utilizar este comando (Por defecto, esto instala el entorno Gnome)
 ```
 sudo dnf groupinstall "Server with GUI"
 sudo systemctl set-default graphical
 sudo reboot
 ```
-- **Cloud, Docker, Workstation Live Images **and** WSL** no han sido probados
+> [!IMPORTANT]
+> **Cloud, Docker, Workstation Live Images and WSL** no han sido probados
+
 #### Primer Vistazo
 Si instalaste la versión completa y/o una versión con componentes básicos tendrás 3 repositorios esenciales.
 - BaseOS
 - AppStream
 - Extras.
+
 *Si deseas obtener más información para saber que hace cada repositorio, visita: *[https://wiki.rockylinux.org/rocky/repo/](https://wiki.rockylinux.org/rocky/repo/)
-## 0.5 Actualizar a Rocky Linux 10.X
-A partir del 11 de Noviembre del 2025 Rocky empezo a actualizar a versiones 10.X (Similar a sus versiones anteriores)
+# 0.5 Actualización a Rocky Linux 10.X
+A partir del 11 de Noviembre del 2025 Rocky empezo a actualizar a versiones 10.X *(Similar a sus versiones anteriores)*
+
 Si tienes la versión 10.0 y existe una versión superior (10.0 → 10.x) actualizalo a la ultima versión, así evitarás errores en esta guía.
 #### Método 1 - Terminal
 ```
@@ -43,7 +63,7 @@ sudo dnf upgrade
 ```
 #### Método 2 - Software
 **Software > Updates > Check Updates**
-## 1. Repositorios Esenciales
+# 1. Repositorios Esenciales
 Agrega los repositorios "EPEL" (Extra Packages for Enterprise Linux)
 ```
 sudo dnf install epel-release
