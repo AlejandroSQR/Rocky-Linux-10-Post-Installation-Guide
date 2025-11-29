@@ -5,36 +5,45 @@ Rocky Linux 10 es una distribución basada en RHEL que tiene como objetivo la es
 
 # 0.1 Antes de Instalar
 
-## Secure Boot Desactivado [IMPORTANTE]
+## [IMPORTANTE] Secure Boot Desactivado 
 En esta guía se hizo en base a una versión con Rocky Linux sin Secure Boot, aun así en algunos puntos se resalta que hacer en caso de que esté activado.
 
-## NO está hecho para Distribuciones con actualizaciones frecuentes [IMPORTANTE]
+## [IMPORTANTE] NO está hecho para Distribuciones con Actualizaciones Frecuentes 
 
 **NO** intentes con distribuciones Linux que se actualizan constantemente, como Fedora Workstation/Spin, Nobara, Bazzite, Asahi, Ultramarine, etc.
-
 
 > [!WARNING]
 > Si quieres aplicar esta guía con las distribuciones mencionadas anteriormente, es posible que funcione, pero es muy probable que dañes tu sistema operativo debido a la frecuencia de las actualizaciones que ofrece cada distribución. Esto incluye herramientas, kernel, controladores y kits de desarrollo, que se actualizan en períodos cortos de tiempo.
 
-(Si buscas un tutorial para distribuciones basadas en Fedora, consulta la Guía de Post-Instalación para Fedora 43) 
+> Si buscas un tutorial para distribuciones basadas en Fedora, consulta la Guía de Post-Instalación para Fedora 43) (Puede funcionar en versiones anteriores de Fedora).
 
-(Puede funcionar en versiones anteriores de Fedora). 
-[https://github.com/devangshekhawat/Fedora-43-Post-Install-Guide]
+[https://github.com/devangshekhawat/Fedora-43-Post-Install-Guide](Fedora-43-Post-Install-Guide)
 
-## Distros Basados en RHEL [EXPERIMENTAL]
-Aunque la guía está escrita para funcionar con Rocky Linux 10 y versiones posteriores, también puede funcionar en otros sistemas basados en RHEL, como lo son Alma Linux, CentOS o similares.
-Sin embargo, no se garantiza la compatibilidad, ya que algunas secciones o herramientas pueden comportarse de manera diferente dependiendo de la distro basada en RHEL, incluidos sus repositorios. *Esto también aplica a versiones anteriores de Rocky (Rocky Linux 8 y 9)*
-### Diferencias entre ISOs de Rocky Linux
+## [EXPERIMENTAL] Distros Basados en RHEL 
+Aunque la guía está escrita para funcionar con Rocky Linux 10 y versiones posteriores, también puede funcionar en otros sistemas basados en RHEL, como lo son:
+- Alma Linux
+- CentOS
+  
+> [!WARNING]  
+> No se garantiza la compatibilidad total o parcial, algunas secciones o herramientas pueden comportarse de manera diferente dependiendo de la distro basada en RHEL incluidos sus repositorios.
+
+> [!IMPORTANT]
+> También aplica a versiones anteriores de Rocky (Rocky Linux 8 y 9)
+
+## Diferencias entre ISOs de Rocky Linux
+
 Link para descargar Rocky Linux 10.x
 [https://rockylinux.org/download](https://rockylinux.org/download)
-- En esta guía se utilizará la instalación completa **(DVD ISO)**, ya que proporciona GNOME de forma predeterminada y limpia, además no es necesario seleccionar configuraciones adicionales.
+
+> [!IMPORTANT]
+> En esta guía se utilizará la instalación completa **(DVD ISO)**, ya que proporciona GNOME de forma predeterminada y limpia, además no es necesario seleccionar configuraciones adicionales.
   
-- La versión **Online (Boot ISO)** requiere conexión a Internet durante la instalación, lo que le ofrece más opciones, repositorios y programas en función de lo que desees, pero eso no cambiará los pasos de esta guía.
+La versión **Online (Boot ISO)** requiere conexión a Internet durante la instalación, lo que le ofrece más opciones, repositorios y programas en función de lo que desees, pero eso no cambiará los pasos de esta guía.
 
  > [!TIP]
 > Si prefieres una configuración como la versión completa (DVD ISO), solo tiene que marcar Workstation/Desktop durante la instalación.
 
-- La versión **(Minimal ISO)** no instalará ninguna interfaz gráfica después de la instalación, todo lo que se haga después de reiniciar se realizará desde la línea de comandos.
+La versión **(Minimal ISO)** no instalará ninguna interfaz gráfica después de la instalación, todo lo que se haga después de reiniciar se realizará desde la línea de comandos.
  > [!TIP]
 > Si deseas instalar un entorno gráfico, pruebe a utilizar este comando (Por defecto, esto instala el entorno Gnome)
 ```
@@ -45,24 +54,27 @@ sudo reboot
 > [!IMPORTANT]
 > **Cloud, Docker, Workstation Live Images and WSL** no han sido probados
 
-#### Primer Vistazo
+## Primer Vistazo
 Si instalaste la versión completa y/o una versión con componentes básicos tendrás 3 repositorios esenciales.
 - BaseOS
 - AppStream
 - Extras.
 
-*Si deseas obtener más información para saber que hace cada repositorio, visita: *[https://wiki.rockylinux.org/rocky/repo/](https://wiki.rockylinux.org/rocky/repo/)
+> [!NOTE]
+> Si deseas obtener más información para saber que hace cada repositorio, visita: [https://wiki.rockylinux.org/rocky/repo/](https://wiki.rockylinux.org/rocky/repo/)
+
 # 0.5 Actualización a Rocky Linux 10.X
 A partir del 11 de Noviembre del 2025 Rocky empezo a actualizar a versiones 10.X *(Similar a sus versiones anteriores)*
 
 Si tienes la versión 10.0 y existe una versión superior (10.0 → 10.x) actualizalo a la ultima versión, así evitarás errores en esta guía.
-#### Método 1 - Terminal
+## Método 1 - Terminal
 ```
 sudo dnf update
 sudo dnf upgrade
 ```
-#### Método 2 - Software
+## Método 2 - Software
 **Software > Updates > Check Updates**
+
 # 1. Repositorios Esenciales
 Agrega los repositorios "EPEL" (Extra Packages for Enterprise Linux)
 ```
@@ -80,25 +92,29 @@ Después de agregar los repositorios que necesites revisa si están habilitados 
 ```
 sudo dnf repolist
 ```
-En caso de ser necesario, reinicia el sistema para poder ver las aplicaciones en la tienda de Software
+> [!NOTE]
+> En caso de ser necesario, reinicia el sistema para poder ver las aplicaciones en la tienda de Software
 ```
 reboot
 ```
-## 1.5 [OPCIONAL] Instalar Kernel 6.12+
+# 1.5 [OPCIONAL] Instalar Kernel 6.12+
 Un kernel nuevo en Rocky Linux no es necesario si no presentas algún problema con tu Hardware o dispositivos externos. En caso de que tu hardware sea muy reciente y no detecte algo en específico, el kernel estable que viene con Rocky puede no funcionar y requerir este paso.
 Importar la llave GPG
 ```
 rpm —import https://www.elrepo.org/RPM-GPG-KEY-v2-elrepo.org
 ```
-- ¿Por que? RPM verifica que no haya sido modificado y que provenga realmente del repositorio oficial.
+> [!NOTE]
+> ¿Por qué? RPM verifica que no haya sido modificado y que provenga realmente del repositorio oficial.
+
 Instala el nuevo kernel (Actualizado Diciembre 2025)
 ```
 dnf —enablerepo elrepo-kernel install kernel-ml
 ```
 - El repositorio te ofrecerá la versión **6.17.9** (Diciembre 2025)
-### [IMPORTANTE] Secure Boot después de instalar el nuevo Kernel
+
+## [IMPORTANTE] Secure Boot después de instalar el nuevo Kernel
 Este paso es muy importante si instalaste un kernel más moderno y tienes Secure Boot activado, si ignoras este paso, no te dejará iniciar el S.O correctamente.
--Instrucciones-
+
 Actualizar el repositorio de ElRepo
 ```
 sudo dnf update elrepo-release
@@ -121,22 +137,32 @@ Al momento de que ingreses el comando, te pedirá crear una contraseña y que la
 input password:
 input password again:
 ```
-Una vez creada tu contraseña, reinicia y veras la pantalla de "Shim UEFI Key Management**"** (Generalmente es Azul)
+Una vez creada tu contraseña, reinicia y veras la pantalla de "Shim UEFI Key Management**"** (Generalmente es Azul).
+
 Presione cualquier tecla en un plazo de 10 segundos para continuar. Ingresa utilizando la contraseña establecida anteriormente
-**NOTA: **Si ves que al ingresar la contraseña dice "GPG check FAILED" "Error when fetching, installing or upgrading packages" es porque lanzaron una nueva key, lo más recomendable es desactivar Secure Boot para volver a entrar y generar una nueva key.
-En caso de algún error con el Kernel, regresa a la versión anterior mediante GRUB o vuelve a reinstalar tu S.O
+
+> [!NOTE]
+> Si ves que al ingresar la contraseña dice "GPG check FAILED" "Error when fetching, installing or upgrading packages" es porque lanzaron una nueva key, lo más recomendable es desactivar Secure Boot para volver a entrar y generar una nueva key.
+
+> [!WARNING]
+> En caso de algún error con el Kernel, regresa a la versión anterior mediante GRUB o vuelve a reinstalar tu S.O
+
 Si tienes mas dudas, visita estas páginas como alternativa a esta instalación del Kernel
 [https://vinfrastructure.it/2025/08/installing-latest-kernel-on-a-rocky-linux/](https://vinfrastructure.it/2025/08/installing-latest-kernel-on-a-rocky-linux/)
 [https://docs.rockylinux.org/10/guides/custom-linux-kernel/](https://docs.rockylinux.org/10/guides/custom-linux-kernel/)
-## 2. Utilidades y Dependencias Esenciales
+
+# 2. Utilidades y Dependencias Esenciales
 Muchas herramientas son para programadores, sin embargo
-- Este paso es obligatorio para aquellos que deseen instalar los drivers de NVIDIA
+
+> [!IMPORTANT]
+> Este paso es obligatorio para aquellos que deseen instalar los drivers de NVIDIA
 Habilita el repositorio CodeReady Builder (CRB)
-#### Metodo 1 - Terminal
+
+## Metodo 1 - Terminal
 ```
 sudo dnf config-manager --enable crb
 ```
-#### Metodo 2 - Software
+## Metodo 2 - Software
 - **Software** > **Main Menu** > **Software Repositories** > **"Rocky Linux 10 - CRB"**
 Instalar el grupo de "Development Tools" que viene por defecto en Rocky
 ```
