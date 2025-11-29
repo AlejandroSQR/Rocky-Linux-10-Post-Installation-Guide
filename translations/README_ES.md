@@ -324,6 +324,20 @@ sudo dnf install mesa-libgbm
 
 A partir de aquí dependiendo de tu hardware, necesitas instalar estos paquetes para sacarle mas provecho a tu GPU (o CPU con gráficos integrados)
 
+## NVIDIA
+
+### Libva + NVIDIA
+```
+sudo dnf install libva-nvidia-driver
+```
+
+## AMD
+AMD no usa un paquete separado como Intel o NVIDIA, toda la aceleración de video AMD está integrada dentro de Mesa, igualmente usamos el comando anterior de la sección Mesa.
+```
+sudo dnf install mesa-dri-drivers
+sudo dnf install mesa-libgbm
+```
+
 ## Intel
 ### Libva + Intel (Gráficos Integrados) (Moderno) (CPU Haswell o superiores)
 ```
@@ -340,19 +354,7 @@ sudo dnf install intel-media-driver
 > [!NOTE]
 > Igualmente puedes instalar todos los paquetes.
 
-## AMD
-AMD no usa un paquete separado como Intel o NVIDIA, toda la aceleración de video AMD está integrada dentro de Mesa, igualmente usamos el comando anterior de la sección Mesa.
-```
-sudo dnf install mesa-dri-drivers
-sudo dnf install mesa-libgbm
-```
 
-## NVIDIA
-
-### Libva + NVIDIA
-```
-sudo dnf install libva-nvidia-driver
-```
 
 # 9. Optimizaciones
 ## Desactivar servicio "NetworkManager-wait-online.service"
